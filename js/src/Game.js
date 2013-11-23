@@ -486,10 +486,8 @@ BasicGame.Game.prototype = {
             tempBall.body.velocity.y = 0;
         }
         tempBall.revive();
-        tempBall.x = this.ballInitialX;
-        tempBall.y = this.ballInitialY;
-        tempBall.body.velocity.x = 0;
-        tempBall.body.velocity.y = 0;
+        tempBall.body.x = this.ballInitialX;
+        tempBall.body.y = this.ballInitialY;
 
         this.ballsCount += 1;
 
@@ -507,7 +505,8 @@ BasicGame.Game.prototype = {
 
         this.balls.callAll('kill');
         this.ballsCount = 0;
-        var tempBall = this.balls.getFirstExists(false);
+        var tempBall = this.balls.getFirstDead();
+
         if (tempBall)
         {
             this.resetBall(tempBall);
@@ -552,9 +551,10 @@ BasicGame.Game.prototype = {
 
         if (this.currentLevel > 0) {
             this.currentLevel -= 1;
-            this.populateLevel(this.currentLevel);
+
             this.resetBalls();
             this.initLevelVars();
+            this.populateLevel(this.currentLevel);
             this.resetCountDown();
         }
         this.levelText.content = 'level: ' + (this.currentLevel + 1);
@@ -568,10 +568,13 @@ BasicGame.Game.prototype = {
 
         if (this.currentLevel <= 2) {
             this.currentLevel += 1;
-            this.populateLevel(this.currentLevel);
+
             this.resetBalls();
             this.initLevelVars();
+            this.populateLevel(this.currentLevel);
             this.resetCountDown();
+
+
         }
 
         this.levelText.content = 'level: ' + (this.currentLevel + 1);
