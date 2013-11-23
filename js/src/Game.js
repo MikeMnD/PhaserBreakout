@@ -488,8 +488,8 @@ BasicGame.Game.prototype = {
         tempBall.revive();
         tempBall.x = this.ballInitialX;
         tempBall.y = this.ballInitialY;
-        tempBall.body.x = this.ballInitialX;
-        tempBall.body.y = this.ballInitialY;
+        tempBall.body.velocity.x = 0;
+        tempBall.body.velocity.y = 0;
 
         this.ballsCount += 1;
 
